@@ -1,0 +1,44 @@
+spring:
+  datasource:
+    username: username
+    password: password
+    hikari:
+      connection-test-query: SELECT 1
+  jpa:
+    hibernate:
+      ddl-auto: update
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://139.59.221.89/auth/realms/tc-dev
+feign.autoconfiguration.jackson.enabled: true
+# logging.level.org.hibernate.SQL: DEBUG
+# logging.level.org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+# logging:
+#   level:
+#     root: Debug
+---
+spring:
+  config:
+    activate:
+      on-profile: kubernetes
+  datasource:
+    url: jdbc:postgresql://pg-postgresql-ha-pgpool:5432/em
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://kc-keycloak/auth/realms/tc-dev/protocol/openid-connect/certs 
+---
+spring:
+  config:
+    activate:
+      on-profile: default
+  datasource:
+    url: jdbc:postgresql://localhost:5432/em
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://139.59.221.89/auth/realms/tc-dev/protocol/openid-connect/certs

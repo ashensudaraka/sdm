@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: em
+  labels:
+    app: em
+spec:
+  selector:
+    matchLabels:
+      app: em
+  template:
+    metadata:
+      labels:
+        app: em
+    spec:
+      imagePullSecrets:
+        - name: srcr
+      containers:
+      - name: em
+        image: registry.digitalocean.com/srcr/em:latest
+        env:
+          - name: spring_profiles_active
+            value: kubernetes
+        ports:
+          - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: em
+  labels:
+    app: em
+spec:
+  ports:
+  - port: 80
+    targetPort: 8080
+    name: http-tomcat
+    protocol: TCP
+  selector:
+    app: em
