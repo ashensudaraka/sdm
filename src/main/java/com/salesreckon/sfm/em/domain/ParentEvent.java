@@ -1,5 +1,6 @@
 package com.salesreckon.sfm.em.domain;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -28,15 +29,15 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @Getter
 @Setter
-@JsonIgnoreProperties("hibernateLazyInitializer")
 @Entity
 @EntityListeners(AuditingEntityListener.class)
+@JsonIgnoreProperties(value = {"children", "hibernateLazyInitializer"}, allowSetters = true)
 public class ParentEvent extends Base{
     @NotEmpty(message = "Name is required")
     private String name;
 
     @NotNull(message = "End is required")
-    private LocalDateTime endDateTime;
+    private Instant endDateTime;
 
     @NotNull(message = "Repeat type is required")
     private RepeatType repeatType;

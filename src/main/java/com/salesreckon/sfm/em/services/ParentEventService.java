@@ -1,5 +1,10 @@
 package com.salesreckon.sfm.em.services;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +27,32 @@ public class ParentEventService {
     private final ParentEventRepository parentEventRepository;
     private final EventRepository eventRepository;
 
+    private static ZoneId zoneId = ZoneId.of("Asia/Colombo");
+
+    public static Instant addDay(Instant instant) {
+        ZonedDateTime zdt = ZonedDateTime.ofInstant(instant, zoneId);
+        zdt = zdt.plusDays(1);
+        return zdt.toInstant();
+    }
+
+    public static Instant addWeek(Instant instant) {
+        ZonedDateTime zdt = ZonedDateTime.ofInstant(instant, zoneId);
+        zdt = zdt.plusWeeks(1); 
+        return zdt.toInstant();
+    }
+
+    public static Instant addMonth(Instant instant) {
+        ZonedDateTime zdt = ZonedDateTime.ofInstant(instant, zoneId);
+        zdt = zdt.plusMonths(1);
+        return zdt.toInstant();
+    }
+
+    public static Instant addYear(Instant instant) {
+        ZonedDateTime zdt = ZonedDateTime.ofInstant(instant, zoneId);
+        zdt = zdt.plusYears(1);
+        return zdt.toInstant();
+    }
+
     public ParentEvent post(@Valid ParentEvent parentEvent) {
         if (parentEvent.getChildren() == null || parentEvent.getChildren().size() == 0) {
             throw new BadRequestException("Child event is required");
@@ -39,27 +70,28 @@ public class ParentEventService {
         var events = new ArrayList<Event>();
 
         while (parentEvent.getEndDateTime().isAfter(startingEvent.getEndDateTime())) {
-            var newEvent = Event.builder().ownerId(parentEvent.getOwnerId()).name(parentEvent.getName()).startDateTime(startingEvent.getStartDateTime())
-                    .endDateTime(startingEvent.getEndDateTime()).parentEvent(parentEvent).build();
+            var newEvent = Event.builder().ownerId(parentEvent.getOwnerId()).name(parentEvent.getName())
+                    .startDateTime(startingEvent.getStartDateTime()).endDateTime(startingEvent.getEndDateTime())
+                    .parentEvent(parentEvent).build();
 
             events.add(newEvent);
 
             switch (parentEvent.getRepeatType()) {
                 case DAILY:
-                    startingEvent.setStartDateTime(startingEvent.getStartDateTime().plusDays(1));
-                    startingEvent.setEndDateTime(startingEvent.getEndDateTime().plusDays(1));
+                    startingEvent.setStartDateTime(addDay(startingEvent.getStartDateTime()));
+                    startingEvent.setEndDateTime(addDay(startingEvent.getEndDateTime()));
                     break;
                 case WEEKLY:
-                    startingEvent.setStartDateTime(startingEvent.getStartDateTime().plusWeeks(1));
-                    startingEvent.setEndDateTime(startingEvent.getEndDateTime().plusWeeks(1));
+                    startingEvent.setStartDateTime(addWeek(startingEvent.getStartDateTime()));
+                    startingEvent.setEndDateTime(addWeek(startingEvent.getEndDateTime()));
                     break;
                 case MONTHLY:
-                    startingEvent.setStartDateTime(startingEvent.getStartDateTime().plusMonths(1));
-                    startingEvent.setEndDateTime(startingEvent.getEndDateTime().plusMonths(1));
+                    startingEvent.setStartDateTime(addMonth(startingEvent.getStartDateTime()));
+                    startingEvent.setEndDateTime(addMonth(startingEvent.getEndDateTime()));
                     break;
                 case YEARLY:
-                    startingEvent.setStartDateTime(startingEvent.getStartDateTime().plusYears(1));
-                    startingEvent.setEndDateTime(startingEvent.getEndDateTime().plusYears(1));
+                    startingEvent.setStartDateTime(addYear(startingEvent.getStartDateTime()));
+                    startingEvent.setEndDateTime(addYear(startingEvent.getEndDateTime()));
                     break;
             }
         }

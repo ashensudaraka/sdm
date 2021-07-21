@@ -33,7 +33,7 @@ metadata:
 spec:
   ports:
   - port: 80
-    targetPort: 8080
+    targetPort: 80
     name: http-tomcat
     protocol: TCP
   selector:

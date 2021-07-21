@@ -1,5 +1,6 @@
 package com.salesreckon.sfm.em.domain;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -35,10 +36,10 @@ public class Event extends Base{
     private String name;
 
     @NotNull(message = "Start is required")
-    private LocalDateTime startDateTime;
+    private Instant startDateTime;
     
     @NotNull(message = "End is required")
-    private LocalDateTime endDateTime;
+    private Instant endDateTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private ParentEvent parentEvent;

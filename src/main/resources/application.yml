@@ -1,23 +1,30 @@
+server:
+  port: 80
 spring:
   datasource:
     username: username
     password: password
     hikari:
       connection-test-query: SELECT 1
+      max-lifetime: 300000
+      maximum-pool-size: 3
   jpa:
     hibernate:
       ddl-auto: update
+feign.autoconfiguration.jackson.enabled: true
+---
+spring:
+  config:
+    activate:
+      on-profile: docker-compose
+  datasource:
+    url: jdbc:postgresql://pg:5432/kc
   security:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://139.59.221.89/auth/realms/tc-dev
-feign.autoconfiguration.jackson.enabled: true
-# logging.level.org.hibernate.SQL: DEBUG
-# logging.level.org.hibernate.type.descriptor.sql.BasicBinder: TRACE
-# logging:
-#   level:
-#     root: Debug
+          issuer-uri: http://192.168.1.3:8081/auth/realms/tc-dev
+          jwk-set-uri: http://kc:8080/auth/realms/tc-dev/protocol/openid-connect/certs
 ---
 spring:
   config:
@@ -29,16 +36,5 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          jwk-set-uri: http://kc-keycloak/auth/realms/tc-dev/protocol/openid-connect/certs 
----
-spring:
-  config:
-    activate:
-      on-profile: default
-  datasource:
-    url: jdbc:postgresql://localhost:5432/em
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          jwk-set-uri: http://139.59.221.89/auth/realms/tc-dev/protocol/openid-connect/certs
+          issuer-uri: http://139.59.221.89/auth/realms/tc-dev
+          jwk-set-uri: http://kc-keycloak/auth/realms/tc-dev/protocol/openid-connect/certs

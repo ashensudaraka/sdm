@@ -1,6 +1,8 @@
 package com.salesreckon.sfm.em.controllers;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import com.salesreckon.sfm.em.domain.Event;
 import com.salesreckon.sfm.em.services.EventService;
@@ -30,14 +32,14 @@ public class EventController {
         return ResponseEntity.created(null).body(eventService.post(event));
     }
 
-    @GetMapping
-    public ResponseEntity<Event> get(Long id) {
+    @GetMapping("{id}")
+    public ResponseEntity<Event> get(@PathVariable Long id) {
         return ResponseEntity.ok(eventService.get(id));
     }
 
     @GetMapping("owner/{id}")
     public ResponseEntity<Page<Event>> listForOwnerAndMonth(@PathVariable Long id,
-            @RequestParam LocalDateTime monthStartDateTime, @RequestParam(defaultValue = "0") int page,
+            @RequestParam Instant monthStartDateTime, @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "DESC") Direction direction,
             @RequestParam(defaultValue = "lastModifiedBy") String sortBy) {
         return ResponseEntity.ok(eventService.listForOwnerAndMonth(id, monthStartDateTime,
