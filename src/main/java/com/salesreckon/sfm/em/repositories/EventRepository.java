@@ -1,7 +1,6 @@
 package com.salesreckon.sfm.em.repositories;
 
 import java.time.Instant;
-import java.time.LocalDateTime;
 
 import com.salesreckon.sfm.em.domain.Event;
 

@@ -1,8 +1,6 @@
 package com.salesreckon.sfm.em.controllers;
 
 import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import com.salesreckon.sfm.em.domain.Event;
 import com.salesreckon.sfm.em.services.EventService;

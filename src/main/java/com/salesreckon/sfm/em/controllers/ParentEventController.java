@@ -1,7 +1,6 @@
 package com.salesreckon.sfm.em.controllers;
 
 import com.salesreckon.sfm.em.domain.ParentEvent;
-import com.salesreckon.sfm.em.repositories.ParentEventRepository;
 import com.salesreckon.sfm.em.services.ParentEventService;
 
 import org.springframework.http.ResponseEntity;
