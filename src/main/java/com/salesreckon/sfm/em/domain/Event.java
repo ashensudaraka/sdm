@@ -37,6 +37,7 @@ public class Event extends Base{
     @NotNull(message = "End is required")
     private Instant endDateTime;
 
+    @JsonIgnoreProperties("children")
     @ManyToOne(fetch = FetchType.LAZY)
     private ParentEvent parentEvent;
 

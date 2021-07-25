@@ -38,6 +38,7 @@ public class ParentEvent extends Base{
     @NotNull(message = "Repeat type is required")
     private RepeatType repeatType;
 
+    @JsonIgnoreProperties("parentEvent")
     @OneToMany(mappedBy = "parentEvent", fetch = FetchType.LAZY)
     private List<Event> children;    
 
