@@ -22,7 +22,7 @@ spec:
           - name: spring_profiles_active
             value: kubernetes
         ports:
-          - containerPort: 8080
+          - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
