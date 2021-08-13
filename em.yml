@@ -17,7 +17,7 @@ spec:
         - name: srcr
       containers:
       - name: em
-        image: registry.digitalocean.com/srcr/em:latest
+        image: localhost:32000/em:latest
         env:
           - name: spring_profiles_active
             value: kubernetes

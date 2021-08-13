@@ -40,5 +40,5 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://139.59.221.89/auth/realms/tc-dev
+          issuer-uri: http://192.168.1.11/auth/realms/tc-dev
           jwk-set-uri: http://kc-keycloak/auth/realms/tc-dev/protocol/openid-connect/certs
