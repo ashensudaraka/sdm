@@ -14,10 +14,10 @@ spec:
         app: em
     spec:
       imagePullSecrets:
-        - name: srcr
+        - name: tc-dev
       containers:
       - name: em
-        image: localhost:32000/em:latest
+        image: registry.digitalocean.com/tc-dev/em:latest
         env:
           - name: spring_profiles_active
             value: kubernetes
