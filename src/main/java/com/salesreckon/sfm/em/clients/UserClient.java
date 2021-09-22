@@ -1,7 +1,6 @@
 package com.salesreckon.sfm.em.clients;
 
 import com.salesreckon.sfm.em.domain.UserRepresentation;
-
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;

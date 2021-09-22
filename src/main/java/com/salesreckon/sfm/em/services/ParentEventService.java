@@ -1,30 +1,26 @@
 package com.salesreckon.sfm.em.services;
 
-import java.time.Instant;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.util.ArrayList;
-
-import javax.validation.Valid;
-
 import com.salesreckon.sfm.em.domain.Event;
 import com.salesreckon.sfm.em.domain.ParentEvent;
 import com.salesreckon.sfm.em.exceptions.BadRequestException;
 import com.salesreckon.sfm.em.exceptions.EntityNotFoundException;
 import com.salesreckon.sfm.em.repositories.EventRepository;
 import com.salesreckon.sfm.em.repositories.ParentEventRepository;
-
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import lombok.RequiredArgsConstructor;
+import javax.validation.Valid;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.ArrayList;
 
 @RequiredArgsConstructor
 @Service
 public class ParentEventService {
+    private static ZoneId zoneId = ZoneId.of("Asia/Colombo");
     private final ParentEventRepository parentEventRepository;
     private final EventRepository eventRepository;
-
-    private static ZoneId zoneId = ZoneId.of("Asia/Colombo");
 
     public static Instant addDay(Instant instant) {
         ZonedDateTime zdt = ZonedDateTime.ofInstant(instant, zoneId);
@@ -34,7 +30,7 @@ public class ParentEventService {
 
     public static Instant addWeek(Instant instant) {
         ZonedDateTime zdt = ZonedDateTime.ofInstant(instant, zoneId);
-        zdt = zdt.plusWeeks(1); 
+        zdt = zdt.plusWeeks(1);
         return zdt.toInstant();
     }
 

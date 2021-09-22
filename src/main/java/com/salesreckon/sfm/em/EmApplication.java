@@ -5,8 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.openfeign.EnableFeignClients;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.envers.repository.support.EnversRevisionRepositoryFactoryBean;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @EnableCaching
 @EnableFeignClients
@@ -15,8 +15,8 @@ import org.springframework.data.envers.repository.support.EnversRevisionReposito
 @SpringBootApplication(scanBasePackages = {"com.salesreckon.sfm.em", "com.salesreckon.microservices.core"})
 public class EmApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(EmApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(EmApplication.class, args);
+    }
 
 }

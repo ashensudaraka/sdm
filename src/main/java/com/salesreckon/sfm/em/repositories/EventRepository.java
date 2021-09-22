@@ -1,14 +1,14 @@
 package com.salesreckon.sfm.em.repositories;
 
-import java.time.Instant;
-
 import com.salesreckon.sfm.em.domain.Event;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.time.Instant;
+
 public interface EventRepository extends JpaRepository<Event, Long> {
     Page<Event> findByOwnerIdAndStartDateTimeBetween(Long id, Instant monthStartDateTime, Instant monthEndDateTime, Pageable pageable);
+
     Page<Event> findByParentEventId(Long id, Pageable pageable);
 }

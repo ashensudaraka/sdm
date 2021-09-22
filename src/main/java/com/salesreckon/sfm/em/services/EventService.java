@@ -1,18 +1,15 @@
 package com.salesreckon.sfm.em.services;
 
-import java.time.Instant;
-
-import javax.validation.Valid;
-
 import com.salesreckon.sfm.em.domain.Event;
 import com.salesreckon.sfm.em.exceptions.EntityNotFoundException;
 import com.salesreckon.sfm.em.repositories.EventRepository;
-
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import lombok.RequiredArgsConstructor;
+import javax.validation.Valid;
+import java.time.Instant;
 
 @RequiredArgsConstructor
 @Service
@@ -28,7 +25,7 @@ public class EventService {
     }
 
     public Page<Event> listForOwnerAndMonth(Long id, Instant monthStartDateTime, Pageable pageable) {
-        
+
         return eventRepository.findByOwnerIdAndStartDateTimeBetween(id, monthStartDateTime, ParentEventService.addMonth(monthStartDateTime), pageable);
     }
 

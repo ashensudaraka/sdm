@@ -4,6 +4,9 @@ oidc:
 server:
   port: 80
 spring:
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
   datasource:
     username: username
     password: password
