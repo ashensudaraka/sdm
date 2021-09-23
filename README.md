@@ -22,4 +22,5 @@ kubectl apply -f em.yml
 kubectl delete -f em.yml && kubectl apply -f em.yml
 ```
 
-docker build -t registry.digitalocean.com/tc-dev/em:latest . && docker push registry.digitalocean.com/tc-dev/em:latest && kubectl delete -f em.yml && kubectl apply -f em.yml
+docker build -t registry.digitalocean.com/tc-dev/em:latest . && docker push registry.digitalocean.com/tc-dev/em:latest
+&& kubectl delete -f em.yml && kubectl apply -f em.yml
