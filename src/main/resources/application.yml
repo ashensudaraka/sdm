@@ -1,6 +1,6 @@
 oidc:
   clientId: sfm
-  url: http://192.168.1.11/auth/realms/sfm
+  url: http://192.168.1.10/auth/realms/sfm
 server:
   port: 80
 spring:
@@ -46,5 +46,5 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://159.89.211.5/auth/realms/tc-dev
+          issuer-uri: http://192.168.1.10/auth/realms/tc-dev
           jwk-set-uri: http://kc-keycloak/auth/realms/tc-dev/protocol/openid-connect/certs
