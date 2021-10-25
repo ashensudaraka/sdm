@@ -13,14 +13,18 @@ spec:
       labels:
         app: em
     spec:
-      imagePullSecrets:
-        - name: tc-dev
       containers:
         - name: em
           image: localhost:32000/em:latest
           env:
             - name: spring_profiles_active
               value: kubernetes
+            - name: auth_url
+              value: https://tc.uat.salesreckon.com
+            - name: db_host
+              value: tc-uat-postgresql-ha-pgpool
+            - name: keycloak_host
+              value: tc-uat-keycloak
           ports:
             - containerPort: 80
 ---

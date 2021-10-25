@@ -16,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.Instant;
+import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -39,5 +40,5 @@ public class Event extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private ParentEvent parentEvent;
 
-    private Long ownerId;
+    private UUID ownerId;
 }

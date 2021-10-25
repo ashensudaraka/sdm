@@ -1,5 +1,6 @@
 package com.salesreckon.sfm.em.services;
 
+import com.salesreckon.microservices.core.Base.BaseService;
 import com.salesreckon.sfm.em.domain.Event;
 import com.salesreckon.sfm.em.domain.ParentEvent;
 import com.salesreckon.sfm.em.exceptions.BadRequestException;
@@ -15,12 +16,15 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 
-@RequiredArgsConstructor
 @Service
-public class ParentEventService {
+public class ParentEventService extends BaseService<ParentEvent, ParentEventRepository> {
     private static ZoneId zoneId = ZoneId.of("Asia/Colombo");
-    private final ParentEventRepository parentEventRepository;
     private final EventRepository eventRepository;
+
+    public ParentEventService(EventRepository eventRepository) {
+        super("parent_event");
+        this.eventRepository = eventRepository;
+    }
 
     public static Instant addDay(Instant instant) {
         ZonedDateTime zdt = ZonedDateTime.ofInstant(instant, zoneId);
@@ -58,7 +62,7 @@ public class ParentEventService {
         }
 
         parentEvent.setChildren(null);
-        parentEvent = parentEventRepository.save(parentEvent);
+        parentEvent = baseRepository.save(parentEvent);
 
         var events = new ArrayList<Event>();
 
@@ -92,9 +96,5 @@ public class ParentEventService {
         eventRepository.saveAll(events);
 
         return parentEvent;
-    }
-
-    public ParentEvent get(Long id) {
-        return parentEventRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 }

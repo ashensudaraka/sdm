@@ -17,6 +17,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.Instant;
 import java.util.List;
+import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -40,5 +41,5 @@ public class ParentEvent extends BaseEntity {
     @OneToMany(mappedBy = "parentEvent", fetch = FetchType.LAZY)
     private List<Event> children;
 
-    private Long ownerId;
+    private UUID ownerId;
 }
