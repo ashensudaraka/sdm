@@ -13,14 +13,18 @@ spec:
       labels:
         app: em
     spec:
+      imagePullSecrets:
+        - name: registry-srtc
       containers:
         - name: em
           image: localhost:32000/em:latest
+#          image: registry.digitalocean.com/srtc/em:latest
           env:
             - name: spring_profiles_active
               value: kubernetes
             - name: auth_url
-              value: https://tc.uat.salesreckon.com
+              value: https://demo.salesreckon.com
+#              value: https://tc.uat.salesreckon.com
             - name: db_host
               value: tc-uat-postgresql-ha-pgpool
             - name: keycloak_host

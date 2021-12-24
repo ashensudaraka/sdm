@@ -12,16 +12,18 @@ spring:
     password: password
     hikari:
       connection-test-query: SELECT 1
-      max-lifetime: 300000
-      idle-timeout: 60000
-      maximum-pool-size: 2
+      minimumIdle: 5
+      maximumPoolSize: 10
+      idleTimeout: 120000
+      connectionTimeout: 300000
+      leakDetectionThreshold: 300000
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
 feign.autoconfiguration.jackson.enabled: true
 logging:
   level:
-    root: Debug
+    root: Error
 ---
 spring:
   config:
