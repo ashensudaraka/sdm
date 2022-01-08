@@ -17,7 +17,7 @@ import java.util.UUID;
 public class EventService extends BaseService<Event, EventRepository> {
 
     public EventService() {
-        super("event");
+        super("event", Event.class);
     }
 
     public Page<Event> listForOwnerAndMonth(UUID id, Instant monthStartDateTime, Pageable pageable) {

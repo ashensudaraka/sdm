@@ -22,7 +22,7 @@ public class ParentEventService extends BaseService<ParentEvent, ParentEventRepo
     private final EventRepository eventRepository;
 
     public ParentEventService(EventRepository eventRepository) {
-        super("parent_event");
+        super("parent_event", ParentEvent.class);
         this.eventRepository = eventRepository;
     }
 

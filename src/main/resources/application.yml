@@ -19,11 +19,11 @@ spring:
       leakDetectionThreshold: 300000
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
 feign.autoconfiguration.jackson.enabled: true
 logging:
   level:
-    root: Error
+    root: error
 ---
 spring:
   config:
