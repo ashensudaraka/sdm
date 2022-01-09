@@ -4,6 +4,7 @@ RUN apk add maven
 WORKDIR /app
 COPY pom.xml .
 COPY src ./src
+ARG CACHEBUST=1
 RUN --mount=type=cache,target=/root/.m2 mvn clean package -Dmaven.test.skip -U
 
 FROM azul/zulu-openjdk-alpine:11.0.12-11.50.19-jre-headless as extractor
