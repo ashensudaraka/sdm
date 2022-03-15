@@ -2,14 +2,11 @@ package com.salesreckon.sfm.em.services;
 
 import com.salesreckon.microservices.core.Base.BaseService;
 import com.salesreckon.sfm.em.domain.Event;
-import com.salesreckon.sfm.em.exceptions.EntityNotFoundException;
 import com.salesreckon.sfm.em.repositories.EventRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import javax.validation.Valid;
 import java.time.Instant;
 import java.util.UUID;
 
@@ -17,7 +14,7 @@ import java.util.UUID;
 public class EventService extends BaseService<Event, EventRepository> {
 
     public EventService() {
-        super("event", Event.class);
+        super(Event.class);
     }
 
     public Page<Event> listForOwnerAndMonth(UUID id, Instant monthStartDateTime, Pageable pageable) {

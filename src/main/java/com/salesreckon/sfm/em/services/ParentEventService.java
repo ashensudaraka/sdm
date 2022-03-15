@@ -4,10 +4,8 @@ import com.salesreckon.microservices.core.Base.BaseService;
 import com.salesreckon.sfm.em.domain.Event;
 import com.salesreckon.sfm.em.domain.ParentEvent;
 import com.salesreckon.sfm.em.exceptions.BadRequestException;
-import com.salesreckon.sfm.em.exceptions.EntityNotFoundException;
 import com.salesreckon.sfm.em.repositories.EventRepository;
 import com.salesreckon.sfm.em.repositories.ParentEventRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
@@ -22,7 +20,7 @@ public class ParentEventService extends BaseService<ParentEvent, ParentEventRepo
     private final EventRepository eventRepository;
 
     public ParentEventService(EventRepository eventRepository) {
-        super("parent_event", ParentEvent.class);
+        super(ParentEvent.class);
         this.eventRepository = eventRepository;
     }
 

@@ -14,23 +14,53 @@ spec:
         app: em
     spec:
       imagePullSecrets:
-        - name: registry-srtc
+        - name: cr-secret
+      initContainers:
+        - name: wait-for-pg
+          image: busybox:latest
+          imagePullPolicy: IfNotPresent
+          command: ['sh', '-c', 'until nc -vz ${POD_NAME} 5432; do echo "Waiting for postgres..."; sleep 3; done;']
+          env:
+            - name: POD_NAME
+              value: sdm-postgresql
       containers:
         - name: em
-          image: localhost:32000/em:latest
-#          image: registry.digitalocean.com/srtc/em:latest
+          image: salesreckon.jfrog.io/sdm-docker/em:latest
+          livenessProbe:
+            initialDelaySeconds: 7
+            httpGet:
+              path: "/em/actuator/health/liveness"
+              port: 8080
+            failureThreshold: 3
+            periodSeconds: 5
+          readinessProbe:
+            initialDelaySeconds: 7
+            httpGet:
+              path: "/em/actuator/health/readiness"
+              port: 8080
+            failureThreshold: 3
+            periodSeconds: 5
           env:
             - name: spring_profiles_active
               value: kubernetes
             - name: auth_url
-              value: https://demo.salesreckon.com
-#              value: https://tc.uat.salesreckon.com
+              value: https://tc.uat.salesreckon.com
             - name: db_host
-              value: tc-uat-postgresql
+              value: sdm-postgresql
             - name: keycloak_host
-              value: tc-uat-keycloak
+              value: sdm-keycloak
+            - name: client_id
+              value: sfm
+            - name: realm
+              value: tc-dev
+            - name: database_username
+              value: sdm_username
+            - name: database_password
+              value: sdm_password
+            - name: log_level
+              value: info
           ports:
-            - containerPort: 80
+            - containerPort: 8080
 ---
 apiVersion: v1
 kind: Service
@@ -41,7 +71,7 @@ metadata:
 spec:
   ports:
     - port: 80
-      targetPort: 80
+      targetPort: 8080
       name: http-tomcat
       protocol: TCP
   selector:

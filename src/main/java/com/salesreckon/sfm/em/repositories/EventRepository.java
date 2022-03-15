@@ -4,7 +4,6 @@ import com.salesreckon.microservices.core.Base.BaseRepository;
 import com.salesreckon.sfm.em.domain.Event;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.Instant;
 import java.util.UUID;
