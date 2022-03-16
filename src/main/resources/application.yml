@@ -25,6 +25,10 @@ feign.autoconfiguration.jackson.enabled: true
 logging:
   level:
     root: ${log_level}
+management:
+  endpoints:
+    web.exposure:
+      include: health,info,prometheus
 ---
 spring:
   config:
